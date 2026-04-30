@@ -29,9 +29,10 @@ vector<vector<string>> parse(vector<string> t){
 }
 
 int main(){
+  string that_thing = "your wish is my command>>";;
+
   while (1){
     string line;
-    string that_thing = "your wish is my command>>";;
     cout<<that_thing;
     //read input
     getline(cin, line);
@@ -75,13 +76,21 @@ int main(){
     if (cmd[0][0]=="exit"){
       exit(0);
     }
-
     if (cmd[0][0] == "cd") {
-    chdir(cmd[0][1].c_str());
+    if (cmd[0].size() < 2) {
+        cerr << "cd: missing argument\n";
+        continue;
+    }
+
+    if (chdir(cmd[0][1].c_str()) == -1) {
+        perror("cd");
+    }
+
     continue;
-  }
+}
     else if(cmd[0][0]=="prompt"){
-      that_thing=cmd[0][1];
+      if (cmd[0].size()==2){
+      that_thing=cmd[0][1]+">>";}
       continue;
     }
      if (cmd.size() == 2){
