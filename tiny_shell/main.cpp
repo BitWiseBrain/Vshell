@@ -31,7 +31,8 @@ vector<vector<string>> parse(vector<string> t){
 int main(){
   while (1){
     string line;
-    cout<<"your wish is my command>>";
+    string that_thing = "your wish is my command>>";;
+    cout<<that_thing;
     //read input
     getline(cin, line);
     vector<string> tokens;
@@ -68,6 +69,8 @@ int main(){
     }
     if (!current.empty()) { tokens.push_back(current);}
 
+    if (tokens.empty()) continue;
+
     auto cmd = parse(tokens);
     if (cmd[0][0]=="exit"){
       exit(0);
@@ -75,10 +78,12 @@ int main(){
 
     if (cmd[0][0] == "cd") {
     chdir(cmd[0][1].c_str());
+    continue;
   }
-    if (tokens.empty()) continue;
-
-    else{
+    else if(cmd[0][0]=="prompt"){
+      that_thing=cmd[0][1];
+      continue;
+    }
      if (cmd.size() == 2){
         int fd[2];
         pipe(fd);
@@ -96,7 +101,7 @@ int main(){
 
           vector<char*> argv;
           for (auto &s: cmd1){
-            argv.push_back(s.data());
+            argv.push_back(const_cast<char*>(s.c_str()));
           }
           argv.push_back(nullptr);
           execvp(argv[0], argv.data());
@@ -111,7 +116,7 @@ int main(){
 
           vector<char*> argv;
           for (auto &s: cmd2){
-            argv.push_back(s.data());
+            argv.push_back(const_cast<char*>(s.c_str()));
           }
           argv.push_back(nullptr);
           execvp(argv[0], argv.data());
@@ -142,9 +147,8 @@ int main(){
        printf("WORKING ON MORE FEATURES COMMING SOON");
      }
 
-    }
+    
 }
 return 0;
 }
-
 
