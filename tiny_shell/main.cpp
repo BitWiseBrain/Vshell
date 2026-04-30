@@ -73,6 +73,8 @@ int main(){
     if (tokens.empty()) continue;
 
     auto cmd = parse(tokens);
+    if (cmd.empty() || cmd[0].empty()) continue;
+  
     if (cmd[0][0]=="exit"){
       exit(0);
     }
