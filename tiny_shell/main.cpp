@@ -69,9 +69,15 @@ int main(){
     if (!current.empty()) { tokens.push_back(current);}
 
     auto cmd = parse(tokens);
-    if (tokens[0]=="exit"){
-      break;
+    if (cmd[0][0]=="exit"){
+      exit(0);
     }
+
+    if (cmd[0][0] == "cd") {
+    chdir(cmd[0][1].c_str());
+  }
+    if (tokens.empty()) continue;
+
     else{
      if (cmd.size() == 2){
         int fd[2];
