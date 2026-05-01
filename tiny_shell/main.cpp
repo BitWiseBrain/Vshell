@@ -2,7 +2,6 @@
 #include <sys/wait.h>
 using namespace std;
 
-//lex it like u mean it
 enum class State{
   NORMAL,
   IN_QUOTE,
@@ -34,7 +33,6 @@ int main(){
   while (1){
     string line;
     cout<<that_thing;
-    //read input
     getline(cin, line);
     vector<string> tokens;
     string current;
