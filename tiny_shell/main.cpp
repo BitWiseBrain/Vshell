@@ -32,8 +32,11 @@ int main(){
 
   while (1){
     string line;
-    cout<<that_thing;
-    getline(cin, line);
+    cout<<that_thing<<flush;
+    if (!getline(cin, line)){
+      cout<<"exit\n";
+      exit(0);
+    }
     vector<string> tokens;
     string current;
     State s = State::NORMAL;
